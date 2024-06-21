@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:ulearning_bloc/themes/textstyles.dart';
 
 class PageViewContainer extends StatelessWidget {
   final String assetsImage;
@@ -36,23 +36,15 @@ class PageViewContainer extends StatelessWidget {
             child: Text(
               textAlign: TextAlign.center,
               title,
-              style: GoogleFonts.poppins(
-                fontSize: 24.sp,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyles.mlBold,
             ),
           ),
           Container(
               width: 375.w,
               padding: EdgeInsets.only(left: 30.w, right: 30.w),
-              child: Text(
-                subTitle,
-                textAlign: TextAlign.center,
-                style: GoogleFonts.poppins(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.normal,
-                    color: Colors.black54),
-              )),
+              child: Text(subTitle,
+                  textAlign: TextAlign.center,
+                  style: TextStyles.sm.copyWith(color: Colors.black54))),
           GestureDetector(
             onTap: () {
               onTap(context);
@@ -74,8 +66,7 @@ class PageViewContainer extends StatelessWidget {
               child: Center(
                 child: Text(
                   btnName,
-                  style:
-                      GoogleFonts.poppins(fontSize: 14.sp, color: Colors.white),
+                  style: TextStyles.smBold.copyWith(color: Colors.white),
                 ),
               ),
             ),

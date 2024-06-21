@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class TextStyles {
   static TextStyle get normal => GoogleFonts.poppins(
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.normal,
         fontSize: 14.sp,
       );
 
