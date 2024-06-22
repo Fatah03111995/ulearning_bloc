@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulearning_bloc/pages/signin/bloc/signin_bloc.dart';
+import 'package:ulearning_bloc/pages/signin/bloc/signin_event.dart';
+import 'package:ulearning_bloc/pages/signin/bloc/signin_state.dart';
 import 'package:ulearning_bloc/pages/signin/widget/icon_img_container.dart';
 import 'package:ulearning_bloc/pages/signin/widget/input_text.dart';
 import 'package:ulearning_bloc/themes/textstyles.dart';
 
-class SignInPage extends StatefulWidget {
+class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
 
-  @override
-  State<SignInPage> createState() => _SignInPageState();
-}
-
-class _SignInPageState extends State<SignInPage> {
-  String iconPath = 'assets/icons';
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final String iconPath = 'assets/icons';
 
   @override
   Widget build(BuildContext context) {
+    SignInState signInState = context.watch<SignInBloc>().state;
+    print(signInState.email);
+    print(signInState.password);
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -66,12 +67,16 @@ class _SignInPageState extends State<SignInPage> {
                   children: [
                     InputText(
                       label: 'e-mail',
-                      controller: emailController,
+                      onChanged: (value) => context
+                          .read<SignInBloc>()
+                          .add(EmailEvent(email: value)),
                       icon: Icons.email,
                     ),
                     InputText(
                       label: 'password',
-                      controller: passwordController,
+                      onChanged: (value) => context
+                          .read<SignInBloc>()
+                          .add(PasswordEvent(password: value)),
                       icon: Icons.lock,
                       isVisible: false,
                     )

@@ -3,15 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_bloc/themes/textstyles.dart';
 
 class InputText extends StatelessWidget {
-  final TextEditingController controller;
   final String label;
   final String? hint;
   final IconData? icon;
   final bool isVisible;
+  final void Function(String) onChanged;
   const InputText(
       {super.key,
       required this.label,
-      required this.controller,
+      required this.onChanged,
       this.hint,
       this.icon,
       this.isVisible = true});
@@ -22,7 +22,7 @@ class InputText extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
       child: TextField(
-        controller: controller,
+        onChanged: onChanged,
         style: TextStyles.s,
         obscureText: !isVisible,
         decoration: InputDecoration(

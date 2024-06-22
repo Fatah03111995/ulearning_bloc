@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulearning_bloc/pages/signin/bloc/signin_bloc.dart';
 import 'package:ulearning_bloc/pages/welcome/bloc/welcome_bloc.dart';
 import 'package:ulearning_bloc/pages/welcome/welcome.dart';
 
@@ -18,7 +19,10 @@ class MainApp extends StatelessWidget {
         const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
 
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => WelcomeBloc())],
+      providers: [
+        BlocProvider(create: (_) => WelcomeBloc()),
+        BlocProvider(create: (_) => SignInBloc()),
+      ],
       child: const ScreenUtilInit(
         child:
             MaterialApp(debugShowCheckedModeBanner: false, home: WelcomePage()),
