@@ -1,12 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulearning_bloc/firebase_options.dart';
 import 'package:ulearning_bloc/pages/signin/bloc/signin_bloc.dart';
 import 'package:ulearning_bloc/pages/welcome/bloc/welcome_bloc.dart';
 import 'package:ulearning_bloc/pages/welcome/welcome.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.android);
   runApp(const MainApp());
 }
 

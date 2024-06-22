@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulearning_bloc/core/services/user_connection.dart';
 import 'package:ulearning_bloc/pages/signin/bloc/signin_bloc.dart';
 import 'package:ulearning_bloc/pages/signin/bloc/signin_event.dart';
 import 'package:ulearning_bloc/pages/signin/bloc/signin_state.dart';
+import 'package:ulearning_bloc/pages/signin/widget/button_signin.dart';
 import 'package:ulearning_bloc/pages/signin/widget/icon_img_container.dart';
 import 'package:ulearning_bloc/pages/signin/widget/input_text.dart';
 import 'package:ulearning_bloc/themes/textstyles.dart';
@@ -15,10 +17,6 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SignInState signInState = context.watch<SignInBloc>().state;
-    print(signInState.email);
-    print(signInState.password);
-
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -91,35 +89,18 @@ class SignInPage extends StatelessWidget {
                   style: TextStyles.s,
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(top: 70.h),
-                width: 300.w,
-                height: 50.h,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Colors.blue,
-                ),
-                child: Center(
-                  child: Text(
-                    'Sign In',
-                    style: TextStyles.smBold.copyWith(color: Colors.white),
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 10.h),
-                width: 300.w,
-                height: 50.h,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Colors.lightBlue,
-                ),
-                child: Center(
-                  child: Text(
-                    'Sign Up',
-                    style: TextStyles.smBold.copyWith(color: Colors.white),
-                  ),
-                ),
+              ButtonSignInPage(
+                  txt: 'Sign In',
+                  onTap: () {
+                    SignInState signInState = context.read<SignInBloc>().state;
+                    print(signInState);
+                    UserConnection.loginByEmail(
+                        email: signInState.email,
+                        password: signInState.password);
+                  }),
+              ButtonSignInPage(
+                onTap: () {},
+                txt: 'Sign Up',
               ),
             ],
           ),

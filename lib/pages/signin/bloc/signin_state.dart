@@ -10,4 +10,7 @@ class SignInState {
 
   SignInState copyWith({String? email, String? password}) => SignInState(
       email: email ?? this.email, password: password ?? this.password);
+
+  @override
+  String toString() => 'SignInState(email: $email, password: $password)';
 }
