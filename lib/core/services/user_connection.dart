@@ -4,15 +4,27 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ulearning_bloc/core/services/component_util.dart';
 
 class UserConnection {
-  static Future<void> register(
-      {required String email, required String password}) async {
+  static Future<void> register({
+    required String userName,
+    required String email,
+    required String password,
+    required String confirmPassword,
+  }) async {
+    if (password != confirmPassword) {
+      ComponentUtil.toastErr('password and confirm password does not match');
+      return;
+    }
     try {
       UserCredential response = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
       if (response.user == null) {
         throw 'error : response.user = null';
       } else {
-        ComponentUtil.toastSuccess('success to register, please login');
+        await response.user?.sendEmailVerification().then((value) {
+          ComponentUtil.toastInfo(
+              'Please check your email, to verify your email address');
+        });
+        await response.user?.updateDisplayName(userName);
       }
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
@@ -50,7 +62,7 @@ class UserConnection {
       User? user = credential.user;
       if (user != null) {
         // got verified user from firebase
-        ComponentUtil.toastSuccess('Welcome !');
+        ComponentUtil.toastSuccess('Welcome ${user.displayName}!');
       } else {
         // error getting user from firebase
         ComponentUtil.toastErr('error after cecking email');

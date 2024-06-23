@@ -90,8 +90,10 @@ class SignUpPage extends StatelessWidget {
                   onTap: () async {
                     SignUpState signInState = context.read<SignUpBloc>().state;
                     await UserConnection.register(
+                            userName: signInState.userName,
                             email: signInState.email,
-                            password: signInState.password)
+                            password: signInState.password,
+                            confirmPassword: signInState.confirmPassword)
                         .then((_) {
                       Navigator.push(
                           context,
