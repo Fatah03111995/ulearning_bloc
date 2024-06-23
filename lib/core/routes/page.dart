@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ulearning_bloc/core/routes/name.dart';
 import 'package:ulearning_bloc/pages/signin/bloc/signin_bloc.dart';
 import 'package:ulearning_bloc/pages/signin/sign_in.dart';
+import 'package:ulearning_bloc/pages/signup/bloc/signup_bloc.dart';
 import 'package:ulearning_bloc/pages/signup/sign_up.dart';
 import 'package:ulearning_bloc/pages/welcome/bloc/welcome_bloc.dart';
 import 'package:ulearning_bloc/pages/welcome/welcome.dart';
@@ -38,12 +39,12 @@ class AppRoutes {
         PageData(
           path: NameRoutes.register,
           page: const SignUpPage(), //const SignUp(),
-          bloc: BlocProvider(create: (context) => SignInBloc() // SignUpBloc(),
+          bloc: BlocProvider(create: (context) => SignUpBloc() // SignUpBloc(),
               ),
         ),
       ];
 
-  static List<BlocProvider> get allBlocProvider {
+  static List<BlocProvider> allBlocProvider(BuildContext context) {
     return List.generate(routes.length, (index) {
       return routes[index].bloc;
     });
