@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulearning_bloc/core/routes/name.dart';
 import 'package:ulearning_bloc/core/services/user_connection.dart';
-import 'package:ulearning_bloc/pages/signin/sign_in.dart';
 import 'package:ulearning_bloc/pages/signup/widget/widget.dart';
 import 'package:ulearning_bloc/pages/signup/bloc/bloc.dart';
 import 'package:ulearning_bloc/themes/textstyles.dart';
@@ -95,10 +95,7 @@ class SignUpPage extends StatelessWidget {
                             password: signInState.password,
                             confirmPassword: signInState.confirmPassword)
                         .then((_) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SignInPage()));
+                      Navigator.pushNamed(context, NameRoutes.signIn);
                     });
                   }),
             ],

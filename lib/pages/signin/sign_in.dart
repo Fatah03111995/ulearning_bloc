@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulearning_bloc/core/routes/name.dart';
 import 'package:ulearning_bloc/core/services/user_connection.dart';
 import 'package:ulearning_bloc/pages/signin/bloc/bloc.dart';
 import 'package:ulearning_bloc/pages/signin/widget/widget.dart';
-import 'package:ulearning_bloc/pages/signup/sign_up.dart';
 import 'package:ulearning_bloc/themes/textstyles.dart';
 
 class SignInPage extends StatelessWidget {
@@ -97,8 +97,7 @@ class SignInPage extends StatelessWidget {
                   }),
               ButtonSignInPage(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (ctx) => const SignUpPage()));
+                  Navigator.pushNamed(context, NameRoutes.register);
                 },
                 txt: 'Sign Up',
               ),

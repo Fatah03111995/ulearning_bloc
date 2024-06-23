@@ -2,7 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ulearning_bloc/pages/signin/sign_in.dart';
+import 'package:ulearning_bloc/core/routes/name.dart';
 import 'package:ulearning_bloc/pages/welcome/bloc/welcome_bloc.dart';
 import 'package:ulearning_bloc/pages/welcome/bloc/welcome_event.dart';
 import 'package:ulearning_bloc/pages/welcome/bloc/welcome_state.dart';
@@ -93,10 +93,8 @@ class _WelcomePageState extends State<WelcomePage> {
           duration: const Duration(milliseconds: 500),
           curve: Curves.decelerate);
     } else {
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => const SignInPage()),
-          (route) => false);
+      Navigator.pushNamedAndRemoveUntil(
+          context, NameRoutes.signIn, (route) => false);
     }
   }
 }
