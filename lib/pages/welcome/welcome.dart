@@ -60,8 +60,9 @@ class _WelcomePageState extends State<WelcomePage> {
           PageView(
               controller: pageController,
               onPageChanged: (value) {
-                welcomeState.page = value.toDouble();
-                context.read<WelcomeBloc>().add(WelcomeEvent());
+                context
+                    .read<WelcomeBloc>()
+                    .add(WelcomeEvent(page: value.toDouble()));
               },
               children: listPageView),
           Positioned(
@@ -89,10 +90,13 @@ class _WelcomePageState extends State<WelcomePage> {
 
     if (welcomeStatePage < 3) {
       pageController.animateToPage(welcomeStatePage,
-          duration: const Duration(seconds: 1), curve: Curves.decelerate);
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.decelerate);
     } else {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const SignInPage()));
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const SignInPage()),
+          (route) => false);
     }
   }
 }

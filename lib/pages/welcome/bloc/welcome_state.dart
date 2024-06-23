@@ -1,7 +1,16 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class WelcomeState {
-  double page;
+  final double page;
 
-  WelcomeState({
+  const WelcomeState({
     this.page = 0,
   });
+
+  WelcomeState copyWith({
+    double? page,
+  }) {
+    return WelcomeState(
+      page: page ?? this.page,
+    );
+  }
 }

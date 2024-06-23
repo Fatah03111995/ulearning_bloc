@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_bloc/firebase_options.dart';
 import 'package:ulearning_bloc/pages/signin/bloc/signin_bloc.dart';
+import 'package:ulearning_bloc/pages/signup/bloc/bloc.dart';
 import 'package:ulearning_bloc/pages/welcome/bloc/welcome_bloc.dart';
 import 'package:ulearning_bloc/pages/welcome/welcome.dart';
 
@@ -27,6 +28,7 @@ class MainApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => WelcomeBloc()),
         BlocProvider(create: (_) => SignInBloc()),
+        BlocProvider(create: (_) => SignUpBloc())
       ],
       child: const ScreenUtilInit(
         child:

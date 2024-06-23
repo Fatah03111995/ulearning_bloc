@@ -2,15 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_bloc/core/services/user_connection.dart';
-import 'package:ulearning_bloc/pages/signin/bloc/bloc.dart';
-import 'package:ulearning_bloc/pages/signin/widget/widget.dart';
-import 'package:ulearning_bloc/pages/signup/sign_up.dart';
+import 'package:ulearning_bloc/pages/signin/sign_in.dart';
+import 'package:ulearning_bloc/pages/signup/widget/widget.dart';
+import 'package:ulearning_bloc/pages/signup/bloc/bloc.dart';
 import 'package:ulearning_bloc/themes/textstyles.dart';
 
-class SignInPage extends StatelessWidget {
-  const SignInPage({super.key});
-
-  final String iconPath = 'assets/icons';
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +16,7 @@ class SignInPage extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(
-          'Sign In',
+          'Sign Up',
           style: TextStyles.m,
         ),
         centerTitle: true,
@@ -35,23 +33,8 @@ class SignInPage extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(height: 70.h),
-              SizedBox(
-                width: 250.w,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    IconImgContainer(
-                        onTap: () {}, pathImage: '$iconPath/google.png'),
-                    IconImgContainer(
-                        onTap: () {}, pathImage: '$iconPath/apple.png'),
-                    IconImgContainer(
-                        onTap: () {}, pathImage: '$iconPath/facebook.png'),
-                  ],
-                ),
-              ),
-              SizedBox(height: 30.h),
               Text(
-                'or Sign in With Your Email Account',
+                'Sign Up with Your Email',
                 style: TextStyles.sm.copyWith(color: Colors.black45),
               ),
               SizedBox(height: 30.h),
@@ -61,17 +44,32 @@ class SignInPage extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     InputText(
+                      label: 'User Name',
+                      onChanged: (value) => context
+                          .read<SignUpBloc>()
+                          .add(UserNameEvent(userName: value)),
+                      icon: Icons.person,
+                    ),
+                    InputText(
                       label: 'e-mail',
                       onChanged: (value) => context
-                          .read<SignInBloc>()
+                          .read<SignUpBloc>()
                           .add(EmailEvent(email: value)),
                       icon: Icons.email,
                     ),
                     InputText(
                       label: 'password',
                       onChanged: (value) => context
-                          .read<SignInBloc>()
+                          .read<SignUpBloc>()
                           .add(PasswordEvent(password: value)),
+                      icon: Icons.lock,
+                      isVisible: false,
+                    ),
+                    InputText(
+                      label: 'confirm password',
+                      onChanged: (value) => context
+                          .read<SignUpBloc>()
+                          .add(ConfirmPasswordEvent(confirmPassword: value)),
                       icon: Icons.lock,
                       isVisible: false,
                     )
@@ -82,26 +80,25 @@ class SignInPage extends StatelessWidget {
               SizedBox(
                 width: 300.w,
                 child: Text(
-                  'forgot password ?',
+                  'with press register button, you have already agree with all terms and condition',
                   style: TextStyles.s,
                 ),
               ),
-              SizedBox(height: 70.h),
+              SizedBox(height: 50.h),
               ButtonSignInPage(
-                  txt: 'Sign In',
-                  onTap: () {
-                    SignInState signInState = context.read<SignInBloc>().state;
-                    UserConnection.loginByEmail(
-                        email: signInState.email,
-                        password: signInState.password);
+                  txt: 'Register',
+                  onTap: () async {
+                    SignUpState signInState = context.read<SignUpBloc>().state;
+                    await UserConnection.register(
+                            email: signInState.email,
+                            password: signInState.password)
+                        .then((_) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignInPage()));
+                    });
                   }),
-              ButtonSignInPage(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (ctx) => const SignUpPage()));
-                },
-                txt: 'Sign Up',
-              ),
             ],
           ),
         ),
