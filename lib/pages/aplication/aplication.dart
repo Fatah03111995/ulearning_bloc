@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_bloc/pages/aplication/bloc/app._state.dart';
 import 'package:ulearning_bloc/pages/aplication/bloc/app_bloc.dart';
 import 'package:ulearning_bloc/pages/aplication/bloc/app_event.dart';
+import 'package:ulearning_bloc/pages/aplication/widget/application_routes.dart';
 
 class Application extends StatelessWidget {
   const Application({super.key});
@@ -13,11 +14,7 @@ class Application extends StatelessWidget {
     AppState appState = context.watch<AppBloc>().state;
 
     return Scaffold(
-      body: const SafeArea(
-        child: Center(
-          child: Text('Main Aplication'),
-        ),
-      ),
+      body: ApplicationRoutes().getPage(appState.index),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) {
           context.read<AppBloc>().add(ChangeIndex(index: index));
