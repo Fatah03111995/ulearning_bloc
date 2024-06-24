@@ -70,14 +70,26 @@ class AppRoutes {
           routes.where((route) => route.path == settings.name).toList();
 
       if (result.isNotEmpty) {
+        // --------------- MAKE SURE INITIAL ROUTE RUN ONLY IN FIRST INSTALLATION
         if (settings.name == NameRoutes.initial &&
             Global.storagePref.getDeviceFirstOpen()) {
-          return MaterialPageRoute(builder: (_) => const SignInPage());
+          // ---------------- CONDITION IF USER HAS BEEN LOGGED IN
+          bool getIsLogIn = Global.storagePref.getIsLogIn();
+          if (getIsLogIn) {
+            return MaterialPageRoute(
+                builder: (context) => const Application(), settings: settings);
+          }
+
+          return MaterialPageRoute(
+              builder: (_) => const SignInPage(), settings: settings);
         }
+
         return MaterialPageRoute(
             builder: (context) => result.first.page, settings: settings);
       }
     }
-    return MaterialPageRoute(builder: (context) => const SignInPage());
+
+    return MaterialPageRoute(
+        builder: (context) => const SignInPage(), settings: settings);
   }
 }

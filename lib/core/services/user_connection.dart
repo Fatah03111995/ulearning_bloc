@@ -1,7 +1,9 @@
 // ignore_for_file: avoid_print
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ulearning_bloc/core/constants/constants.dart';
 import 'package:ulearning_bloc/core/services/component_util.dart';
+import 'package:ulearning_bloc/global.dart';
 
 class UserConnection {
   static Future<int?> register({
@@ -10,6 +12,7 @@ class UserConnection {
     required String password,
     required String confirmPassword,
   }) async {
+    //---------------------- CHECK INPUT
     if (userName.isEmpty ||
         email.isEmpty ||
         password.isEmpty ||
@@ -21,6 +24,8 @@ class UserConnection {
       ComponentUtil.toastErr('password and confirm password does not match');
       return null;
     }
+
+    // ------------------- REGISTER PROCESS
     try {
       UserCredential response = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
@@ -70,6 +75,8 @@ class UserConnection {
       User? user = credential.user;
       if (user != null) {
         // got verified user from firebase
+        Global.storagePref.setString(
+            key: Constants.STORAGE_USER_PROFILE_KEY, value: user.uid);
         ComponentUtil.toastSuccess('Welcome ${user.displayName}!');
       } else {
         // error getting user from firebase
