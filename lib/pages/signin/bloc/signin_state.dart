@@ -3,7 +3,7 @@ class SignInState {
   final String email;
   final String password;
 
-  SignInState({
+  const SignInState({
     this.email = '',
     this.password = '',
   });

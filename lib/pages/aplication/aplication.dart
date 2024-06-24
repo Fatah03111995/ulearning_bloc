@@ -10,7 +10,7 @@ class Application extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppState _appState = context.watch<AppBloc>().state;
+    AppState appState = context.watch<AppBloc>().state;
 
     return Scaffold(
       body: const SafeArea(
@@ -23,7 +23,7 @@ class Application extends StatelessWidget {
           context.read<AppBloc>().add(ChangeIndex(index: index));
         },
         iconSize: 24.sp,
-        currentIndex: _appState.index,
+        currentIndex: appState.index,
         showSelectedLabels: false,
         unselectedItemColor: Colors.black45,
         items: [

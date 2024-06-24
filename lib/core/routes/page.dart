@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ulearning_bloc/core/routes/name.dart';
+import 'package:ulearning_bloc/global.dart';
 import 'package:ulearning_bloc/pages/aplication/aplication.dart';
 import 'package:ulearning_bloc/pages/aplication/bloc/app_bloc.dart';
 import 'package:ulearning_bloc/pages/signin/bloc/signin_bloc.dart';
@@ -67,7 +68,12 @@ class AppRoutes {
     if (settings.name != null) {
       List<PageData> result =
           routes.where((route) => route.path == settings.name).toList();
+
       if (result.isNotEmpty) {
+        if (settings.name == NameRoutes.initial &&
+            Global.storagePref.getDeviceFirstOpen()) {
+          return MaterialPageRoute(builder: (_) => const SignInPage());
+        }
         return MaterialPageRoute(
             builder: (context) => result.first.page, settings: settings);
       }

@@ -1,15 +1,14 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulearning_bloc/core/routes/name.dart';
 import 'package:ulearning_bloc/core/routes/page.dart';
-import 'package:ulearning_bloc/firebase_options.dart';
+import 'package:ulearning_bloc/global.dart';
+import 'package:ulearning_bloc/pages/welcome/welcome.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.android);
+  await Global.init();
   runApp(const MainApp());
 }
 
@@ -26,7 +25,6 @@ class MainApp extends StatelessWidget {
       child: const ScreenUtilInit(
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          // home: NameRoutes.initial,
           onGenerateRoute: AppRoutes.generateRoute,
         ),
       ),
