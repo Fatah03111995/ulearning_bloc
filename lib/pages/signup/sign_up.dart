@@ -5,7 +5,7 @@ import 'package:ulearning_bloc/core/routes/name.dart';
 import 'package:ulearning_bloc/core/services/user_connection.dart';
 import 'package:ulearning_bloc/pages/signup/widget/widget.dart';
 import 'package:ulearning_bloc/pages/signup/bloc/bloc.dart';
-import 'package:ulearning_bloc/themes/textstyles.dart';
+import 'package:ulearning_bloc/core/themes/textstyles.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
@@ -89,7 +89,6 @@ class SignUpPage extends StatelessWidget {
                   txt: 'Register',
                   onTap: () async {
                     SignUpState signInState = context.read<SignUpBloc>().state;
-                    print(signInState);
                     await UserConnection.register(
                             userName: signInState.userName,
                             email: signInState.email,

@@ -5,7 +5,7 @@ import 'package:ulearning_bloc/core/routes/name.dart';
 import 'package:ulearning_bloc/core/services/user_connection.dart';
 import 'package:ulearning_bloc/pages/signin/bloc/bloc.dart';
 import 'package:ulearning_bloc/pages/signin/widget/widget.dart';
-import 'package:ulearning_bloc/themes/textstyles.dart';
+import 'package:ulearning_bloc/core/themes/textstyles.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
@@ -89,11 +89,13 @@ class SignInPage extends StatelessWidget {
               SizedBox(height: 70.h),
               ButtonSignInPage(
                   txt: 'Sign In',
-                  onTap: () {
+                  onTap: () async {
                     SignInState signInState = context.read<SignInBloc>().state;
                     UserConnection.loginByEmail(
-                        email: signInState.email,
-                        password: signInState.password);
+                            email: signInState.email,
+                            password: signInState.password)
+                        .then((value) => Navigator.pushNamed(
+                            context, NameRoutes.aplication));
                   }),
               ButtonSignInPage(
                 onTap: () {
