@@ -53,10 +53,13 @@ class AppRoutes {
         )
       ];
 
+  static List<PageData> getPage(String nameRoutes) {
+    return routes.where((route) => route.path == nameRoutes).toList();
+  }
+
   static MaterialPageRoute generateRoute(RouteSettings settings) {
     if (settings.name != null) {
-      List<PageData> result =
-          routes.where((route) => route.path == settings.name).toList();
+      List<PageData> result = getPage(settings.name ?? '');
 
       if (result.isNotEmpty) {
         // --------------- MAKE SURE INITIAL ROUTE RUN ONLY IN FIRST INSTALLATION
@@ -66,19 +69,22 @@ class AppRoutes {
           bool getIsLogIn = Global.storagePref.getIsLogIn();
           if (getIsLogIn) {
             return MaterialPageRoute(
-                builder: (context) => const Application(), settings: settings);
+                builder: (_) => getPage(NameRoutes.aplication).first.page,
+                settings: settings);
           }
 
           return MaterialPageRoute(
-              builder: (_) => const SignInPage(), settings: settings);
+              builder: (_) => getPage(NameRoutes.signIn).first.page,
+              settings: settings);
         }
 
         return MaterialPageRoute(
-            builder: (context) => result.first.page, settings: settings);
+            builder: (_) => result.first.page, settings: settings);
       }
     }
 
     return MaterialPageRoute(
-        builder: (context) => const SignInPage(), settings: settings);
+        builder: (_) => getPage(NameRoutes.signIn).first.page,
+        settings: settings);
   }
 }
