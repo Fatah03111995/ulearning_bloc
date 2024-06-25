@@ -14,12 +14,10 @@ import 'package:ulearning_bloc/pages/welcome/welcome.dart';
 class PageData {
   String path;
   Widget page;
-  dynamic bloc;
 
   PageData({
     required this.path,
     required this.page,
-    this.bloc,
   });
 }
 
@@ -27,42 +25,33 @@ class AppRoutes {
   static List<PageData> get routes => [
         PageData(
           path: NameRoutes.initial,
-          page: const WelcomePage(),
-          bloc: BlocProvider(
+          page: BlocProvider(
             create: (context) => WelcomeBloc(),
+            child: const WelcomePage(),
           ),
         ),
         PageData(
           path: NameRoutes.signIn,
-          page: const SignInPage(),
-          bloc: BlocProvider(
+          page: BlocProvider(
             create: (context) => SignInBloc(),
+            child: const SignInPage(),
           ),
         ),
         PageData(
           path: NameRoutes.register,
-          page: const SignUpPage(), //const SignUp(),
-          bloc: BlocProvider(create: (context) => SignUpBloc() // SignUpBloc(),
-              ),
+          page: BlocProvider(
+            create: (context) => SignUpBloc(),
+            child: const SignUpPage(),
+          ), //const SignUp(),
         ),
         PageData(
           path: NameRoutes.aplication,
-          page: const Application(),
-          bloc: BlocProvider(
+          page: BlocProvider(
             create: (context) => AppBloc(),
+            child: const Application(),
           ),
         )
       ];
-
-  static List<BlocProvider> allBlocProvider(BuildContext context) {
-    List<BlocProvider> allData = [];
-    for (var el in routes) {
-      if (el.bloc != null) {
-        allData.add(el.bloc);
-      }
-    }
-    return allData;
-  }
 
   static MaterialPageRoute generateRoute(RouteSettings settings) {
     if (settings.name != null) {

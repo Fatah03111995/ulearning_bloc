@@ -4,4 +4,7 @@ class WelcomeEvent {
   const WelcomeEvent({
     required this.page,
   });
+
+  @override
+  String toString() => 'WelcomeEvent(page: $page)';
 }

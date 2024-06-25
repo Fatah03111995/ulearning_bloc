@@ -13,4 +13,7 @@ class WelcomeState {
       page: page ?? this.page,
     );
   }
+
+  @override
+  String toString() => 'WelcomeState(page: $page)';
 }

@@ -21,12 +21,6 @@ class _WelcomePageState extends State<WelcomePage> {
   PageController pageController = PageController(initialPage: 0);
 
   @override
-  void dispose() {
-    pageController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     WelcomeState welcomeState = context.watch<WelcomeBloc>().state;
     String imageAsset = 'assets/images';

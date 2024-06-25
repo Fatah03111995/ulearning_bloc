@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_bloc/core/themes/textstyles.dart';
 import 'package:ulearning_bloc/pages/aplication/pages/home/bloc/home_bloc.dart';
 import 'package:ulearning_bloc/pages/aplication/pages/home/bloc/home_event.dart';
+import 'package:ulearning_bloc/pages/aplication/pages/home/widget/button_category.dart';
 import 'package:ulearning_bloc/pages/aplication/widget/app_pageview.dart';
 import 'package:ulearning_bloc/pages/aplication/widget/input_text_app.dart';
 import 'package:ulearning_bloc/pages/aplication/widget/topnav_bar.dart';
@@ -135,8 +136,20 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
+            SizedBox(height: 10.h),
             SizedBox(
-              width: 100.w,
+              width: 200.w,
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ButtonCategory(
+                    label: 'all',
+                    isActive: true,
+                  ),
+                  ButtonCategory(label: 'new'),
+                  ButtonCategory(label: 'popular'),
+                ],
+              ),
             )
           ],
         ),
