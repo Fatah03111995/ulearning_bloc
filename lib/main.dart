@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ulearning_bloc/core/routes/name.dart';
-import 'package:ulearning_bloc/core/routes/page.dart';
+import 'package:ulearning_bloc/core/routes/apps_routes.dart';
 import 'package:ulearning_bloc/global.dart';
-import 'package:ulearning_bloc/pages/welcome/welcome.dart';
 
 void main() async {
   await Global.init();
