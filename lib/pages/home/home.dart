@@ -5,11 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:ulearning_bloc/core/themes/textstyles.dart';
-import 'package:ulearning_bloc/pages/aplication/pages/home/bloc/home_bloc.dart';
-import 'package:ulearning_bloc/pages/aplication/pages/home/bloc/home_event.dart';
+import 'package:ulearning_bloc/pages/home/bloc/home_bloc.dart';
+import 'package:ulearning_bloc/pages/home/bloc/home_event.dart';
 import 'package:ulearning_bloc/pages/aplication/widget/app_pageview.dart';
-import 'package:ulearning_bloc/pages/aplication/widget/button_category.dart';
-import 'package:ulearning_bloc/pages/aplication/widget/course_item.dart';
+import 'package:ulearning_bloc/pages/home/widget/button_category.dart';
+import 'package:ulearning_bloc/pages/home/widget/course_item.dart';
 import 'package:ulearning_bloc/pages/aplication/widget/input_text_app.dart';
 
 class HomePage extends StatelessWidget {

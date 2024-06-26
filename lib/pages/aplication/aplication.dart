@@ -5,6 +5,7 @@ import 'package:ulearning_bloc/pages/aplication/bloc/app._state.dart';
 import 'package:ulearning_bloc/pages/aplication/bloc/app_bloc.dart';
 import 'package:ulearning_bloc/pages/aplication/bloc/app_event.dart';
 import 'package:ulearning_bloc/core/routes/application_page_routes.dart';
+import 'package:ulearning_bloc/pages/aplication/widget/app_drawer.dart';
 
 class Application extends StatelessWidget {
   const Application({super.key});
@@ -34,12 +35,7 @@ class Application extends StatelessWidget {
           )
         ],
       ),
-      drawer: const Drawer(
-        child: Column(children: [
-          Icon(Icons.person),
-          Icon(Icons.settings),
-        ]),
-      ),
+      drawer: const AppDrawer(),
       body: ApplicationRoutes().getPage(appState.index),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) {
@@ -54,7 +50,6 @@ class Application extends StatelessWidget {
           _bottomNavItem(label: 'search', icon: Icons.search),
           _bottomNavItem(label: 'course', icon: Icons.play_arrow),
           _bottomNavItem(label: 'chat', icon: Icons.chat),
-          _bottomNavItem(label: 'profile', icon: Icons.person),
         ],
       ),
     );

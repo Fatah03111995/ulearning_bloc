@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ulearning_bloc/pages/aplication/pages/home/bloc/home_event.dart';
-import 'package:ulearning_bloc/pages/aplication/pages/home/bloc/home_state.dart';
+import 'package:ulearning_bloc/pages/home/bloc/home_event.dart';
+import 'package:ulearning_bloc/pages/home/bloc/home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(const HomeState()) {
