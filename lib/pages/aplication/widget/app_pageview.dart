@@ -17,6 +17,8 @@ class AppPageview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+        width: 300.w,
+        height: 180.h,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(imgAsset),
